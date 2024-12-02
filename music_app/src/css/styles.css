@@ -1,0 +1,246 @@
+:root {
+    --primary-color: #1DB954;
+    --secondary-color: #191414;
+    --text-color: #FFFFFF;
+    --background-color: #121212;
+    --accent-color: #1ED760;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 2rem;
+}
+
+#global-search {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+#search-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0 4px 4px 0;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#logout-btn {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #24AA4B;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+}
+
+#sidebar {
+    background-color: #2E2E2E;
+    padding: 1rem;
+    width: 20%;
+    min-width: 200px;
+}
+
+#recommended-tracks {
+    width: 100%;
+    border-collapse: collapse;
+    color: #FFFFFF;
+}
+
+#recommended-tracks th, #recommended-tracks td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+#recommended-tracks th {
+    border-bottom: 1px solid #444444;
+}
+
+#recommended-tracks tbody tr:nth-child(even) {
+    background-color: #3C3C3C;
+}
+
+#main-content {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat {
+    background-color: #2E2E2E;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    width: 48%;
+}
+
+.stat h3 {
+    margin-bottom: 0.5rem;
+}
+
+#charts-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#stream-chart, #track-parameters {
+    background-color: #2E2E2E;
+    padding: 1rem;
+    border-radius: 4px;
+    flex-basis: 50%;
+}
+
+.chart-placeholder {
+    height: 300px;
+    background-color: #3C3C3C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #CCCCCC;
+}
+
+#similar-tracks {
+    background-color: #2E2E2E;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+#similar-tracks table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #FFFFFF;
+}
+
+#similar-tracks th, #similar-tracks td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+#similar-tracks th {
+    border-bottom: 1px solid #444444;
+}
+
+#similar-tracks tbody tr:nth-child(even) {
+    background-color: #3C3C3C;
+}
+
+#friends-section {
+    background-color: #2E2E2E;
+    padding: 1rem;
+    width: 30%;
+    min-width: 300px;
+}
+
+.friend-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.friend-profile {
+    background-color: #3C3C3C;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    width: 48%;
+    margin-bottom: 1rem;
+}
+
+.friend-profile img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.friend-profile h3 {
+    color: #FFFFFF;
+    margin-bottom: 0.25rem;
+}
+
+.friend-profile p {
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+footer {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    text-align: center;
+    color: #CCCCCC;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .search-container {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        min-width: auto;
+    }
+
+    #friends-section {
+        width: 100%;
+        min-width: auto;
+    }
+}
