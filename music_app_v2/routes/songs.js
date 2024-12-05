@@ -202,4 +202,28 @@ router.post('/history', async (req, res) => {
     }
 });
 
+router.get('/trending', async (req, res) => {
+    try {
+        const response = await lastfm.get('', {
+            params: {
+                method: 'chart.gettoptracks',
+                limit: 10
+            }
+        });
+
+        const trendingTracks = response.data.tracks.track.map(track => ({
+            name: track.name,
+            artist: track.artist.name,
+            listeners: track.listeners,
+            image: track.image?.find(img => img.size === 'medium')?.['#text'] || ''
+        }));
+
+        res.json(trendingTracks);
+    } catch (err) {
+        console.error('Error fetching trending songs:', err);
+        res.status(500).json({ error: 'Error fetching trending songs' });
+    }
+});
+
+
 module.exports = router;
