@@ -67,10 +67,9 @@ async function recommendSong(songData) {
     }
 }
 
-// Initialize trending chart
-const trendingChart = document.getElementById('trendingChart');
+//const trendingChart = document.getElementById('trendingChart');
 if (trendingChart) {
-    new Chart(trendingChart, {
+    const chart = new Chart(trendingChart, {
         type: 'bar',
         data: {
             labels: [],
@@ -91,7 +90,30 @@ if (trendingChart) {
             }
         }
     });
+
+    // Fetch trending data and update chart
+    const fetchTrendingSongs = async () => {
+        try {
+            const response = await fetch('/songs/trending');
+            const data = await response.json();
+
+            if (data.error) {
+                console.error('Error fetching trending data:', data.error);
+                return;
+            }
+
+            // Update chart data
+            chart.data.labels = data.map(song => `${song.name} (${song.artist})`);
+            chart.data.datasets[0].data = data.map(song => parseInt(song.listeners, 10) || 0);
+            chart.update();
+        } catch (err) {
+            console.error('Error fetching trending data:', err);
+        }
+    };
+
+    fetchTrendingSongs();
 }
+
 
 // Load recent activity
 async function loadRecentActivity() {
