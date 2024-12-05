@@ -70,7 +70,7 @@ async function recommendSong(songData) {
 //const trendingChart = document.getElementById('trendingChart');
 if (trendingChart) {
     const chart = new Chart(trendingChart, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: [],
             datasets: [{
