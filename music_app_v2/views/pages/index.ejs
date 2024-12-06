@@ -1,48 +1,82 @@
 <!-- views/pages/index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
     <%- include('../partials/head') %>
 </head>
-<body>
+
+<body class="index">
+
     <%- include('../partials/nav') %>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Discover Music</h2>
-                        <div class="search-container mb-4">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Search for songs...">
-                        </div>
-                        <div id="searchResults"></div>
-                    </div>
+        <div class="hero-banner ">
+            <div class="hero-content text-center">
+                <h1>Welcome to the Music Viz!</h1>
+                <p>Your go-to music discovery platform</p>
+                <button class="btn btn-primary">Explore Now</button>
+            </div>
+
+        </div>
+        <div class="index-border">
+            <img src="/img/dance.png" alt="planet" style="height: 380px; padding: -300px; margin: -300px; gap:-3rem; margin-left: 78vw;">
+        </div>
+        <div class="homepage-container">
+            <h2 class="index-title">Discover Music</h2>
+            <h2 class="separater">• • •</h2>
+
+            <p class="subtitle">Explore millions of songs, artists, and albums tailored to your taste.
+                Start your journey to discovering your next favorite track now!</p>
+
+
+            <div class="search-container mb-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search for songs...">
+                <div id="searchResults">
+                    <!-- Dynamic search results will appear here -->
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="home-card">
+                <div id="searchResults"></div>
+                <h2 class="index-title">Recent Activity</h2>
+                <h2 class="separater">• • •</h2>
+                <p class="subtitle">Get a personalized feed of the best songs from friends across the world!</p>
+
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Recent Activity</h3>
                         <div id="recentActivity"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Trending Songs</h3>
-                        <canvas id="trendingChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/main.js"></script>
+                </div>
+            </div>
+            <div class="playlist-info">
+                <img src="/img/disk.jpeg" alt="Playlist Image"
+                    style="width: 15vw; border: 5px solid white; border-radius: 0;">
+
+                <div class="playlist-text">
+                    <h2 class="index-title">Create Your Very Own Playlist Now!</h2>
+                    <h2 class="separater">• • •</h2>
+                    <p class="subtitle">Discover the perfect soundtrack for every moment. Whether you're chasing good
+                        vibes, needing a boost of energy, or unwinding after a long day, create your own playlist and
+                        let the music match your mood. Start building your personalized collection today!</p>
+                </div>
+
+            </div>
+            <div class="msg-container">
+
+                <img src="/img/cat.png" alt="cat" style="width:90vw; margin-bottom:-10vw;">
+
+            </div>
+            <h3 class="index-title">Trending Songs</h3>
+            <div class="trending-chart">
+
+                <canvas id="trendingChart"></canvas>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/main.js"></script>
 </body>
+
 </html>
