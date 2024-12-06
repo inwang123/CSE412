@@ -1,0 +1,196 @@
+/* General Styles */
+body {
+    background: url("/img/hero.jpeg") repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  /* Hero Banner Section */
+  .hero-banner {
+    background: url("/img/hero.jpeg") repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(223, 223, 223);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-content .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    border: none;
+  }
+  
+  /* Homepage Styles */
+  .homepage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10vh;
+    gap: 2rem;
+    background: linear-gradient(to right, #000000, #0e0b0f);
+  }
+  
+  .index-title {
+    color: white;
+    text-align: center;
+    font-weight: 100;
+  }
+  
+  .separater {
+    color: #ffffff;
+    margin-top: -25px;
+    margin-bottom: -20px;
+  }
+  
+  .subtitle {
+    font-weight: 100;
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  /* Home Card */
+  .home-card {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    border-radius: 10px;
+    color: #000;
+    padding: 30px;
+    gap: 1.5rem;
+  }
+  
+  /* Playlist Section */
+  .playlist-info {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin: auto;
+    padding: 40px;
+  }
+  
+  .playlist-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: auto;
+  }
+  
+  /* Search Section */
+  .search-container {
+    position: relative;
+    width: 51%;
+    margin: 0 auto;
+  }
+  
+  #searchResults {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+    margin: 0;
+    margin-top: -5px;
+  }
+  
+  .form-control {
+    background-color: #ffffffb7;
+    color: #333;
+    border-radius: 4px;
+  }
+  
+  .form-control:focus {
+    background-color: #ffffff;
+    border-color: #b20083;
+    box-shadow: 0 0 5px rgba(183, 0, 255, 0.5);
+    color: #000;
+  }
+  
+  /* Song Search Results */
+  .song-result {
+    background-color: white;
+    transition: background-color 0.2s;
+  }
+  
+  .song-result:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Activity Feed */
+  .activity-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Chart Section */
+  .trending-chart {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+  }
+  
+  /* Message Containers */
+  .msg-container,
+  .index-border {
+    background: url("/img/hero.jpeg") repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  .msg-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+  
+  /* Custom Buttons */
+  .recommend-btn {
+    transition: all 0.2s;
+  }
+  
+  .recommend-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 1rem;
+      background-color: transparent;
+    }
+  }
+  
