@@ -1,0 +1,47 @@
+/* General styles */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Song search results */
+.song-result {
+    transition: background-color 0.2s;
+}
+
+.song-result:hover {
+    background-color: #f8f9fa;
+}
+
+/* Activity feed */
+.activity-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+/* Charts */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Custom button styles */
+.recommend-btn {
+    transition: all 0.2s;
+}
+
+.recommend-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+}
