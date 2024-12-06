@@ -76,20 +76,41 @@ if (trendingChart) {
             datasets: [{
                 label: 'Times Recommended',
                 data: [],
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(255, 0, 127, 0.9)',
+                borderColor: 'rgba(255, 0, 127, 0.9)',
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             scales: {
+                x: {
+                    ticks: {
+                        color: 'white' // Set x-axis label color to black
+                    },
+                    grid: {
+                        color: 'black' // Set x-axis gridlines to black
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    ticks: {
+                        color: 'white' // Set y-axis label color to black
+                    },
+                    grid: {
+                        color: 'grey' // Set y-axis gridlines to black
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white' // Set legend labels color to black
+                    }
                 }
             }
         }
     });
+
 
     // Fetch trending data and update chart
     const fetchTrendingSongs = async () => {
