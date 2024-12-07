@@ -1,0 +1,83 @@
+body, html {
+    background-image: url("/img/friend-bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+    color: white; 
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ffffff;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.discover-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: auto;
+    padding: 2rem;
+    margin: auto;
+    width: 70vw;
+    margin-top: 10vh;
+    padding-bottom: 30vh;
+    gap: 1rem;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(62, 30, 30, 0.7));
+}
+
+h2 {
+    font-size: 50px;
+    font-weight: 100;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: white; 
+}
+
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none; 
+}
+
+.track-card, .artist-card {
+    flex: 0 0 auto;
+    background-color: #1c1c1c;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.track-card img, .artist-card img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.artist-card img {
+    border-radius: 50%;
+    height: 120px;
+}
+
+.track-card h6, .artist-card h6 {
+    margin: 10px 0 5px;
+    font-size: 1rem;
+    color: white; 
+}
+
+.track-card p, .artist-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white; 
+}

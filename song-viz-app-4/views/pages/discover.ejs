@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>Discover - Music Viz App</title>
+    <link rel="stylesheet" href="/css/discover.css">
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <div class="container discover-container">
+        <h2>Discover</h2>
+        <hr>
+        
+       <!-- Top Tracks Globally -->
+        <div class="section">
+            <h2>Top Tracks Globally</h2>
+            <div class="horizontal-scroll">
+                <% topTracks.forEach(track => { %>
+                    <div class="card track-card">
+                        <img src="/img/vinyl-placeholder.png" alt="<%= track.name %>">
+                        <h6><%= track.name %></h6>
+                        <p>By: <%= track.artist.name %></p>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <!-- Top Artists in America -->
+        <div class="section">
+            <h2>Top Artists in America</h2>
+            <div class="horizontal-scroll">
+                <% topArtistsAmerica.forEach(artist => { %>
+                    <div class="card artist-card">
+                        <img src="<%= artist.image[2]['#text'] %>" alt="<%= artist.name %>">
+                        <h6><%= artist.name %></h6>
+                        <p>Listeners: <%= artist.listeners %></p>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/footer') %>
+</body>
+</html>

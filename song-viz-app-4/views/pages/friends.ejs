@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- views/partials/head.ejs -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Visualization App</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/friends.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- views/partials/head.ejs -->
+    <title >Friends</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mt-4 friend-container">
+        <h1 style="font-weight: 100;">My Friends</h1>
+        
+        <!-- Search Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Search for Friends</h5>
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Enter username..." autocomplete="off">
+                    <button class="btn btn-primary" id="searchButton" type="button">Search</button>
+                </div>
+                <div id="searchResult" class="mt-4"></div>
+            </div>
+        </div>
+<div class="friends-list">
+        <!-- Pending Friend Requests Section -->
+         <div class="friends-list-box">
+        <h3>Pending Friend Requests</h3>
+        <div id="pendingRequests" class="mb-4">
+            <p>Loading pending requests...</p>
+        </div>
+    </div>
+<div class="friends-list-box">
+        <!-- Existing Friends Section -->
+        <h3>Your Friends</h3>
+        <% if (friends.length > 0) { %>
+            <div class="row">
+                <% friends.forEach(friend => { %>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= friend.full_name %></h5>
+                                <p>@<%= friend.username %></p>
+                                <button class="btn btn-danger btn-sm" onclick="unfriend('<%= friend.user_id %>')">Unfriend</button>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>No friends found.</p>
+        <% } %>
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchButton').addEventListener('click', async () => {
+            const username = document.getElementById('searchInput').value.trim();
+            if (!username) return;
+
+            const searchResultDiv = document.getElementById('searchResult');
+            searchResultDiv.innerHTML = 'Searching...';
+
+            try {
+                const response = await fetch(`/friends/search?username=${username}`);
+                const user = await response.json();
+
+                if (user.error) {
+                    searchResultDiv.innerHTML = `<p class="text-danger">${user.error}</p>`;
+                } else {
+                    searchResultDiv.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${user.full_name}</h5>
+                                <p>@${user.username}</p>
+                                <button class="btn btn-success" onclick="sendFriendRequest(${user.user_id})">Add Friend</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                searchResultDiv.innerHTML = '<p class="text-danger">Error searching for user.</p>';
+            }
+        });
+
+        async function sendFriendRequest(friendId) {
+            try {
+                const response = await fetch('/friends/request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ friendId })
+                });
+
+                if (response.ok) {
+                    alert('Friend request sent!');
+                } else {
+                    alert('Error sending friend request.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function acceptRequest(friendId) {
+            try {
+                const response = await fetch(`/friends/accept/${friendId}`, { method: 'PUT' });
+                if (response.ok) {
+                    alert('Friend request accepted!');
+                    fetchPendingRequests(); // Refresh pending requests
+                    fetchFriends(); // Refresh friends list
+                } else {
+                    alert('Error accepting friend request.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function fetchFriends() {
+            const friendsDiv = document.querySelector('.row');
+            try {
+                const response = await fetch('/friends-list');
+                const friends = await response.json();
+
+                if (friends.length > 0) {
+                    friendsDiv.innerHTML = ''; // Clear existing content
+                    friends.forEach(friend => {
+                        const friendDiv = document.createElement('div');
+                        friendDiv.className = 'col-md-4 mb-3';
+                        friendDiv.innerHTML = `
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">${friend.full_name}</h5>
+                                    <p>@${friend.username}</p>
+                                </div>
+                            </div>
+                        `;
+                        friendsDiv.appendChild(friendDiv);
+                    });
+                } else {
+                    friendsDiv.innerHTML = '<p>No friends found.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching friends:', error);
+            }
+        }
+
+        // Fetch and render pending requests
+        async function fetchPendingRequests() {
+            const pendingRequestsDiv = document.getElementById('pendingRequests');
+            try {
+                const response = await fetch('/friends/pending');
+                const { received, sent } = await response.json();
+
+                let html = '';
+
+                // Display received friend requests
+                if (received.length > 0) {
+                    received.forEach(request => {
+                        html += `
+                            <div class="card mb-2">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">${request.full_name}</h5>
+                                        <p>@${request.username}</p>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-success btn-sm" onclick="acceptRequest(${request.user_id})">Accept</button>
+                                        <button class="btn btn-danger btn-sm" onclick="declineRequest(${request.user_id})">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Display sent friend requests with 'waiting...' status
+                if (sent.length > 0) {
+                    sent.forEach(request => {
+                        html += `
+                            <div class="card mb-2">
+                                <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="card-title">${request.full_name}</h5>
+                                        <p>@${request.username}</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-muted">Waiting...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                pendingRequestsDiv.innerHTML = html || '<p>No pending requests.</p>';
+            } catch (error) {
+                pendingRequestsDiv.innerHTML = '<p class="text-danger">Error fetching pending requests.</p>';
+            }
+        }
+        
+        // Fetch and render friends
+        async function fetchFriends() {
+            const friendsDiv = document.querySelector('.row');
+            try {
+                const response = await fetch('/friends');
+                const friends = await response.json();
+
+                if (friends.length > 0) {
+                    friendsDiv.innerHTML = '';
+                    friends.forEach(friend => {
+                        const friendDiv = document.createElement('div');
+                        friendDiv.className = 'col-md-4 mb-3';
+                        friendDiv.innerHTML = `
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">${friend.full_name}</h5>
+                                    <p>@${friend.username}</p>
+                                </div>
+                            </div>
+                        `;
+                        friendsDiv.appendChild(friendDiv);
+                    });
+                } else {
+                    friendsDiv.innerHTML = '<p>No friends found.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching friends:', error);
+            }
+        }
+
+        // Accept a friend request
+        async function acceptRequest(friendId) {
+            try {
+                const response = await fetch(`/friends/accept/${friendId}`, { method: 'PUT' });
+                if (response.ok) {
+                    alert('Friend request accepted!');
+                    fetchPendingRequests(); // Refresh pending requests
+                    fetchFriends(); // Refresh friends list
+                } else {
+                    alert('Error accepting friend request.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Decline a friend request
+        async function declineRequest(friendId) {
+            try {
+                const response = await fetch(`/friends/decline/${friendId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('Friend request declined.');
+                    fetchPendingRequests(); // Refresh pending requests
+                } else {
+                    alert('Error declining friend request.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function unfriend(friendId) {
+            const confirmUnfriend = confirm("Are you sure you want to unfriend this user?");
+            if (!confirmUnfriend) return;
+
+            try {
+                const response = await fetch(`/friends/unfriend/${friendId}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('Successfully unfriended!');
+                    fetchFriends(); // Refresh friends list
+                } else {
+                    alert('Error unfriending user.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Load pending requests and friends on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPendingRequests();
+            fetchFriends();
+        });
+    </script>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>
