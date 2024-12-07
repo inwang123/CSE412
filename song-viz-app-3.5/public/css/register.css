@@ -14,6 +14,7 @@ button{
     border-radius: 4px;
 }
 .register-container {
+      margin-top:10vh;
     background: rgba(255, 255, 255, 0.812);  /* Semi-transparent white */
     backdrop-filter: blur(10px); /* Blur effect */
     border-radius: 15px;
