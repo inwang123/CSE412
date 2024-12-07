@@ -1,0 +1,39 @@
+body {
+  background-image: url("/img/friend-bg.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  
+}
+
+.friend-container {
+background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(62, 30, 30, 0.7));
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10vh !important;
+  text-align: center;
+  color: white;
+  
+  gap: 3rem;
+  padding: 60px;
+  padding-bottom:35vh;
+}
+
+.friends-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 30px;
+  margin: auto;
+  gap: 17rem;
+
+}
+
+.friends-list-box {
+  display: flex;
+  flex-direction: column;
+
+}
+.card{
+    background-color: transparent;
+}

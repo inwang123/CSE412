@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Music Viz</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <% if (locals.user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/discover">Discover</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/playlists">Playlists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/friends">Friends</a>
+                    </li>
+                <% } %>
+            </ul>
+            <ul class="navbar-nav">
+                <% if (locals.user) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <%= user.username %>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="/auth/logout">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
